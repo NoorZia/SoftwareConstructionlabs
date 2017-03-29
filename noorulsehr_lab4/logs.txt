@@ -1,0 +1,4 @@
+this is log test
+where x = y
+lalalala
+select * from servers
