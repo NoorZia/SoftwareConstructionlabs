@@ -4,6 +4,7 @@ import pickle
 import time as okay
 import MySQLdb
 import hashlib
+import datetime
 authentication = False
 db = MySQLdb.connect(host="localhost",    # your host, usually localhost
                      user="root",         # your username
@@ -68,9 +69,11 @@ It then saves the booked tables in a pickle file and loads from that file later"
 """Test function for booking
 It takes the booking values as parameters and returns true on successful booking
 """
-def booking_test(t,name,time,duration=None):
+def booking_test():
     hour=0
-    s = cur.execute("SELECT * FROM bookings")
+    datee = str(datetime.date.today())
+    s = cur.execute("SELECT * FROM bookings where date = '"+datee+"'")
+    
     bookings_list = []
     # print all the first cell of all the rows
 
@@ -86,6 +89,7 @@ def booking_test(t,name,time,duration=None):
 
     for row in cur.fetchall():
         bookings_list.append(row)
+    """
 
         table_bookings[row[3]][int(row[4])]=(row[0],int(row[1]),int(row[2]))
 
@@ -175,3 +179,5 @@ def booking_test(t,name,time,duration=None):
 
         else:
             return False    #not booked
+"""
+booking_test()
